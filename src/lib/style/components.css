@@ -1,0 +1,11 @@
+@import "color.css";
+
+@layer components {
+    .input {
+        @apply surface-neutral-300-700 block w-full rounded-md shadow-sm;
+        @apply focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50;
+    }
+    .anchor {
+        @apply text-teal-500 hover:text-teal-600 duration-200;
+    }
+}
