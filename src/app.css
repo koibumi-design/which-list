@@ -1,3 +1,22 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer base {
+    .surface-neutral-100-900 {
+        @apply bg-neutral-100 dark:bg-neutral-900;
+    }
+    .text-neutral-900-100 {
+        @apply text-neutral-900 dark:text-neutral-100;
+    }
+    .surface-neutral-200-800 {
+        @apply bg-neutral-200 dark:bg-neutral-800;
+    }
+    .surface-neutral-300-700 {
+        @apply bg-neutral-300 dark:bg-neutral-700;
+    }
+}
+
+html {
+    @apply surface-neutral-100-900 text-neutral-900-100;
+}
