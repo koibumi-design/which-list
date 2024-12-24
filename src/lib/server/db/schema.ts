@@ -5,14 +5,16 @@ export const user = pgTable('user', {
 	email: varchar('email').unique().notNull(),
 	password: text('password').notNull(),
 }, table => ({
-	emailIdx: index('email_idx').on(table.email),
+	emailIdx: index('user_email_idx').on(table.email),
 }));
+
 
 export const project = pgTable('project', {
 	id: uuid('id').primaryKey().defaultRandom(),
 	name: text('name').notNull(),
 	isArchived: boolean('is_archived').notNull().default(false),
 });
+
 
 export const projectMemberRule = pgEnum('project_member_rule', ['owner', 'manager', 'member']);
 export const projectMember = pgTable('project_member', {
@@ -21,8 +23,8 @@ export const projectMember = pgTable('project_member', {
 	userId: uuid('user_id').notNull().references(() => user.id),
 	rule: projectMemberRule('rule').notNull().default('member'),
 }, table => ({
-	projectIdIdx: index('project_id_idx').on(table.projectId),
-	userIdIdx: index('user_id_idx').on(table.userId),
+	projectIdIdx: index('project_project_id_idx').on(table.projectId),
+	userIdIdx: index('project_user_id_idx').on(table.userId),
 }))
 
 
@@ -39,7 +41,7 @@ export const issue = pgTable('issue', {
 	dependsOn: uuid('depends_on').array().notNull().default([]),
 	anyOfDependsOn: boolean('any_of_depends_on').notNull().default(false),
 }, table => ({
-	projectIdIdx: index('project_id_idx').on(table.projectId),
-	assignedToIdx: index('assigned_to_idx').on(table.assignedTo),
-	dependsOnIdx: index('depends_on_idx').on(table.dependsOn),
+	projectIdIdx: index('issue_project_id_idx').on(table.projectId),
+	assignedToIdx: index('issue_assigned_to_idx').on(table.assignedTo),
+	dependsOnIdx: index('issue_depends_on_idx').on(table.dependsOn),
 }))
